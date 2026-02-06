@@ -1,0 +1,412 @@
+/* ============================================
+   BOTTOM NAVIGATION - Modern Mobile Design
+   ============================================ */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-sticky);
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-light);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    padding: var(--spacing-xs) 0 calc(var(--spacing-xs) + env(safe-area-inset-bottom));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.bottom-nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.nav-container,
+.bottom-nav-content {
+    max-width: 540px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+    .nav-container,
+    .bottom-nav-content {
+        max-width: 720px;
+    }
+}
+
+/* ============================================
+   NAV ITEMS
+   ============================================ */
+
+.nav-item,
+.nav-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+    border: none;
+    background: transparent;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    border-radius: var(--radius-lg);
+    min-height: 48px;
+    touch-action: manipulation;
+}
+
+/* Active indicator */
+.nav-item::before,
+.nav-tab::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 40px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 0 0 var(--radius-full) var(--radius-full);
+    transition: transform var(--transition-base);
+}
+
+.nav-item.active::before,
+.nav-tab.active::before {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* Hover background */
+.nav-item::after,
+.nav-tab::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    z-index: -1;
+}
+
+.nav-item:hover::after,
+.nav-tab:hover::after {
+    opacity: 1;
+}
+
+.nav-item:active,
+.nav-tab:active {
+    transform: scale(0.95);
+}
+
+/* ============================================
+   ICON CONTAINER
+   ============================================ */
+
+.nav-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    transition: all var(--transition-base);
+}
+
+.nav-icon svg {
+    width: 24px;
+    height: 24px;
+    transition: all var(--transition-base);
+}
+
+/* Icon animations on active */
+.nav-item.active .nav-icon svg,
+.nav-tab.active .nav-icon svg {
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 4px rgba(33, 150, 243, 0.3));
+}
+
+.nav-item:hover .nav-icon svg,
+.nav-tab:hover .nav-icon svg {
+    transform: translateY(-2px);
+}
+
+/* Notification badge */
+.nav-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--error-500);
+    color: var(--text-on-error);
+    font-size: 10px;
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-full);
+    border: 2px solid var(--bg-primary);
+    box-shadow: var(--shadow-sm);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   LABEL TEXT
+   ============================================ */
+
+.nav-label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-fast);
+    line-height: 1;
+    color: inherit;
+}
+
+.nav-item.active .nav-label,
+.nav-tab.active .nav-label {
+    color: var(--primary-500);
+    font-weight: var(--font-weight-bold);
+}
+
+.nav-item:hover .nav-label,
+.nav-tab:hover .nav-label {
+    color: var(--text-primary);
+}
+
+/* ============================================
+   ACTIVE STATE COLORS
+   ============================================ */
+
+.nav-item.active,
+.nav-tab.active {
+    color: var(--primary-500);
+}
+
+.nav-item.active .nav-icon,
+.nav-tab.active .nav-icon {
+    color: var(--primary-500);
+}
+
+/* Individual tab colors (optional) */
+.nav-item[data-tab="home"].active,
+.nav-tab[data-tab="home"].active {
+    color: var(--primary-500);
+}
+
+.nav-item[data-tab="links"].active,
+.nav-tab[data-tab="links"].active {
+    color: var(--primary-500);
+}
+
+.nav-item[data-tab="search"].active,
+.nav-tab[data-tab="search"].active {
+    color: var(--info-500);
+}
+
+.nav-item[data-tab="messages"].active,
+.nav-tab[data-tab="messages"].active {
+    color: var(--success-500);
+}
+
+.nav-item[data-tab="profile"].active,
+.nav-tab[data-tab="profile"].active {
+    color: var(--primary-600);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 375px) {
+    .nav-container,
+    .bottom-nav-content {
+        padding: 0 var(--spacing-xs);
+    }
+    
+    .nav-item,
+    .nav-tab {
+        padding: var(--spacing-xs);
+        gap: 2px;
+    }
+    
+    .nav-label {
+        font-size: 10px;
+    }
+    
+    .nav-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (min-width: 768px) {
+    .bottom-nav {
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+    }
+    
+    .nav-item,
+    .nav-tab {
+        gap: var(--spacing-sm);
+    }
+}
+
+/* Hide on desktop (optional - depends on your design) */
+@media (min-width: 1024px) {
+    /* Uncomment if you want to hide bottom nav on desktop */
+    /* .bottom-nav {
+        display: none;
+    } */
+}
+
+/* ============================================
+   RTL SUPPORT
+   ============================================ */
+
+.bottom-nav.rtl .nav-container,
+.bottom-nav.rtl .bottom-nav-content {
+    flex-direction: row-reverse;
+}
+
+/* ============================================
+   DARK MODE ENHANCEMENTS
+   ============================================ */
+
+[data-theme="dark"] .bottom-nav {
+    background: rgba(var(--bg-primary), 0.95);
+    border-top-color: var(--border-dark);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .nav-item.active .nav-icon svg,
+[data-theme="dark"] .nav-tab.active .nav-icon svg {
+    filter: drop-shadow(0 2px 8px rgba(33, 150, 243, 0.5));
+}
+
+[data-theme="dark"] .nav-badge {
+    box-shadow: var(--shadow-md), 0 0 12px rgba(239, 68, 68, 0.4);
+}
+
+/* ============================================
+   ANIMATION VARIANTS
+   ============================================ */
+
+/* Entrance animation */
+@keyframes slideUpNav {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.bottom-nav.animate-in {
+    animation: slideUpNav 0.3s ease-out;
+}
+
+/* Ripple effect on tap (optional) */
+.nav-item.ripple::after,
+.nav-tab.ripple::after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.nav-item:focus-visible,
+.nav-tab:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-item,
+    .nav-tab,
+    .nav-icon svg,
+    .nav-label,
+    .nav-item::before,
+    .nav-tab::before,
+    .nav-item::after,
+    .nav-tab::after {
+        transition: none;
+    }
+    
+    .nav-item.active .nav-icon svg,
+    .nav-tab.active .nav-icon svg {
+        transform: none;
+    }
+    
+    .nav-badge {
+        animation: none;
+    }
+}
+
+/* Screen reader only text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+
+.bottom-nav.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.bottom-nav.loading .nav-icon svg {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Active Indicator */
+.active-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full) var(--radius-full) 0 0;
+    animation: slideUp var(--transition-fast);
+}

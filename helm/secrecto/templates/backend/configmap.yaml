@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.backend.configMapName }}
+  labels:
+    app: {{ .Values.backend.name }}
+    {{- include "secrecto.labels" . | nindent 4 }}
+data:
+{{- range $key, $value := .Values.backend.config }}
+  {{ $key }}: "{{ $value }}"
+{{- end }}

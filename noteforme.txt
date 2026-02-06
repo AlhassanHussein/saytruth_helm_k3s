@@ -1,0 +1,31 @@
+# Terminal 1: Database
+docker run -d --name postgres -e POSTGRES_USER=saytruth_user \
+  -e POSTGRES_PASSWORD='DevSecurePass123!@#' \
+  -e POSTGRES_DB=saytruth_db -p 5432:5432 postgres:15-alpine
+
+# Terminal 2: Backend
+cd backend
+source ../.venv/bin/activate
+python -m uvicorn app.main:app --reload
+
+# Terminal 3: Frontend
+cd frontend
+npm run dev
+
+
+docker-compose build
+docker-compose up -d
+# Test at http://localhost:8000 and http://localhost:5173
+docker-compose down
+
+
+# Build and import images
+docker build -t saytruth/backend:latest ./backend
+docker save saytruth/backend:latest -o backend.tar
+sudo k3s ctr images import backend.tar
+
+# Deploy
+helm upgrade --install secrecto-dev ./helm/secrecto \
+  -f ./helm/secrecto/values-dev.yaml -n saytruth-dev --create-namespace
+
+

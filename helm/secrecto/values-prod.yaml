@@ -1,0 +1,68 @@
+backend:
+  replicas: 1
+  tag: latest
+  pullPolicy: Never
+  config:
+    DOMAIN: "saytruth.duckdns.org"
+    DEBUG: "false"
+    ENVIRONMENT: "production"
+    DB_HOST: "postgres-service"
+    GOOGLE_CLIENT_ID: "701577617361-bmk37j1e06cdkdh1baqki64vhl6968m5.apps.googleusercontent.com"
+  secret:
+    DB_PASSWORD: "ProdSecurePass456!@#"
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
+
+frontend:
+  replicas: 1
+  tag: latest
+  pullPolicy: Never
+  config:
+    NODE_ENV: "production"
+    VITE_API_BASE_URL: ""
+    VITE_GOOGLE_CLIENT_ID: "701577617361-bmk37j1e06cdkdh1baqki64vhl6968m5.apps.googleusercontent.com"
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
+
+kong:
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "200m"
+    limits:
+      memory: "1024Mi"
+      cpu: "1000m"
+
+postgres:
+  secret:
+    POSTGRES_PASSWORD: "ProdSecurePass456!@#"
+    POSTGRES_ADMIN_PASSWORD: "AdminPass456!@#"
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
+
+# Ingress for production (with domain and HTTPS)
+ingress:
+  enabled: true
+  host: "saytruth.duckdns.org"  # Set your domain here
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  # Enable TLS for HTTPS
+  tls:
+    - hosts:
+        - saytruth.duckdns.org
+      secretName: saytruth-tls

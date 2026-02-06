@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.postgres.pvc.name }}
+  labels:
+    app: {{ .Values.postgres.name }}
+    {{- include "secrecto.labels" . | nindent 4 }}
+spec:
+  accessModes:
+{{- range .Values.postgres.pvc.accessModes }}
+    - {{ . }}
+{{- end }}
+  storageClassName: {{ .Values.postgres.pvc.storageClassName }}
+  resources:
+    requests:
+      storage: {{ .Values.postgres.pvc.size }}

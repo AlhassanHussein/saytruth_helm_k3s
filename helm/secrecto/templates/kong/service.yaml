@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong-service
+  labels:
+    app: {{ .Values.kong.name }}
+    {{- include "secrecto.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.kong.service.type }}
+  selector:
+    app: {{ .Values.kong.name }}
+  ports:
+{{- range .Values.kong.service.ports }}
+    - name: {{ .name }}
+      port: {{ .port }}
+      targetPort: {{ .targetPort }}
+      protocol: TCP
+{{- end }}

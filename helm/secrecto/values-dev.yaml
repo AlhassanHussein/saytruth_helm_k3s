@@ -1,0 +1,46 @@
+backend:
+  tag: latest
+  pullPolicy: Never
+  config:
+    DOMAIN: "localhost"
+    DEBUG: "true"
+    ENVIRONMENT: "development"
+    DB_HOST: "postgres-service"
+    GOOGLE_CLIENT_ID: "701577617361-bmk37j1e06cdkdh1baqki64vhl6968m5.apps.googleusercontent.com"
+  secret:
+    DB_PASSWORD: "DevSecurePass123!@#"
+
+frontend:
+  tag: latest
+  pullPolicy: Never
+  config:
+    NODE_ENV: "development"
+    VITE_API_BASE_URL: ""
+    VITE_GOOGLE_CLIENT_ID: "701577617361-bmk37j1e06cdkdh1baqki64vhl6968m5.apps.googleusercontent.com"
+
+kong:
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+postgres:
+  secret:
+    POSTGRES_PASSWORD: "DevSecurePass123!@#"
+    POSTGRES_ADMIN_PASSWORD: "AdminPass123!@#"
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+# Ingress for development (IP-based access)
+ingress:
+  enabled: true
+  host: ""  # Empty for IP-based access
+  annotations: {}

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.kong.configMapName }}
+  labels:
+    app: {{ .Values.kong.name }}
+    {{- include "secrecto.labels" . | nindent 4 }}
+data:
+  kong.yaml: |
+{{ .Values.kong.config.kongYaml | indent 4 }}

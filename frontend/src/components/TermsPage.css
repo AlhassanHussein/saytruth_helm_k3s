@@ -1,0 +1,94 @@
+/* ============================================
+   TERMS PAGE
+   ============================================ */
+
+.terms-page {
+    min-height: 100vh;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: var(--gradient-surface);
+    display: flex;
+    justify-content: center;
+}
+
+.terms-page.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.terms-card {
+    width: 100%;
+    max-width: 720px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-2xl);
+}
+
+.terms-back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-full);
+    padding: 0.5rem 0.9rem;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-bottom: var(--spacing-lg);
+}
+
+.terms-back:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.terms-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.terms-subtitle {
+    color: var(--text-secondary);
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-md);
+}
+
+.terms-updated {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.terms-section {
+    padding: var(--spacing-md) 0;
+    border-top: 1px solid var(--border-light);
+}
+
+.terms-section h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.terms-section p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+@media (max-width: 480px) {
+    .terms-card {
+        padding: var(--spacing-xl);
+        border-radius: var(--radius-xl);
+    }
+
+    .terms-title {
+        font-size: var(--font-size-2xl);
+    }
+}

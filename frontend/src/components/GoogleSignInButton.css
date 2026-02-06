@@ -1,0 +1,109 @@
+/* ============================================
+   GOOGLE SIGN-IN BUTTON
+   ============================================ */
+
+.google-btn-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.google-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    min-height: 44px;
+}
+
+/* Make the rendered Google button responsive */
+.google-btn-container > div {
+    width: 100% !important;
+}
+
+.google-btn-container iframe {
+    border-radius: var(--radius-full) !important;
+}
+
+.google-btn-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-full);
+    cursor: not-allowed;
+    z-index: 1;
+}
+
+/* Fallback button (when SDK not loaded) */
+.google-btn-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 24px;
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-full);
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.google-btn-fallback:hover:not(:disabled) {
+    background: var(--bg-secondary);
+    border-color: var(--border-dark);
+    box-shadow: var(--shadow-sm);
+}
+
+.google-btn-fallback:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Or divider */
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+    color: var(--text-tertiary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}
+
+.or-divider::before,
+.or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-light);
+}
+
+/* Google linked badge */
+.google-linked-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.google-linked-badge svg {
+    flex-shrink: 0;
+}
+
+.google-linked-badge .google-email {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .google-btn-overlay {
+    background: rgba(0, 0, 0, 0.4);
+}

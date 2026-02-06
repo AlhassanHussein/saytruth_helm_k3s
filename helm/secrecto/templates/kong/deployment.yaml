@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.kong.name }}
+  labels:
+    app: {{ .Values.kong.name }}
+    {{- include "secrecto.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.kong.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.kong.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.kong.name }}
+        {{- include "secrecto.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Values.kong.name }}
+          image: "{{ .Values.kong.image }}:{{ .Values.kong.tag }}"
+          imagePullPolicy: {{ .Values.kong.pullPolicy }}
+          ports:
+            {{- toYaml .Values.kong.ports | nindent 12 }}
+          env:
+            {{- toYaml .Values.kong.env | nindent 12 }}
+          resources:
+            {{- toYaml .Values.kong.resources | nindent 12 }}
+          volumeMounts:
+            - name: kong-config
+              mountPath: /etc/kong
+      volumes:
+        - name: kong-config
+          configMap:
+            name: {{ .Values.kong.configMapName }}

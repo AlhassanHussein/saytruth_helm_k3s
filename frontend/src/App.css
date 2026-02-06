@@ -1,0 +1,132 @@
+/* ============================================
+   APP CONTAINER - Modern SaaS Layout
+   ============================================ */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--gradient-surface);
+  position: relative;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  max-width: 540px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  padding-bottom: calc(80px + var(--spacing-md));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    max-width: 720px;
+    padding: var(--spacing-lg);
+  }
+}
+
+.cards-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md);
+  max-width: 540px;
+  margin: 0 auto;
+  animation: fadeIn var(--transition-base) ease-out;
+}
+
+.skeleton-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+  min-height: 140px;
+  border: 1px solid var(--border-light);
+}
+
+.skeleton-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--bg-tertiary) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.tab-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3xl) var(--spacing-xl);
+  text-align: center;
+  min-height: 60vh;
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+.placeholder-icon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.4;
+  animation: float 3s ease-in-out infinite;
+}
+
+.tab-placeholder h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.tab-placeholder p {
+  font-size: var(--font-size-base);
+  color: var(--text-tertiary);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.page-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary-500);
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.page-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--text-tertiary);
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+[data-theme="dark"] .app {
+  background: var(--bg-primary);
+}
+
+[data-theme="dark"] .skeleton-card {
+  background: var(--bg-secondary);
+}
